@@ -1,0 +1,75 @@
+// import de arquivos padrão
+@import '../_base/_import';
+//@import '_fonts';
+
+@-ms-viewport {
+    //código que corrige quebra de viewport no IE/EDGE mobile
+    //deve vir antes de qualquer outro estilo
+    max-width: 100% !important;
+    width: auto !important;
+}
+
+html {
+    font-family: sans-serif;
+    font-size: #{$fontSize}px;
+    -moz-text-size-adjust: none;
+    -ms-text-size-adjust: none;
+    -webkit-text-size-adjust: none;
+    text-size-adjust: none;
+}
+
+body {
+    color: $colorBlack;
+    height: auto;
+    min-height: 100vh;
+    transition: margin .15s linear;
+}
+
+a {
+    text-decoration: none;
+    transition: color .15s linear;
+    cursor: pointer;
+
+    &:hover, &:active, &:visited, &:focus {
+    }
+}
+
+// Custom placeholder
+::-webkit-input-placeholder {
+    color: $colorBlackLight;
+}
+
+:-moz-placeholder {
+    color: $colorBlackLight;
+}
+
+::-moz-placeholder {
+    color: $colorBlackLight;
+}
+
+:-ms-input-placeholder {
+    color: $colorBlackLight;
+}
+
+p {
+    margin: 0;
+}
+
+#dd-lp-avon {
+    width: 100%;
+    display: inline-block;
+    text-align: center;
+}
+
+.dd-l-avon {
+    &__full-content {
+        display: inline-block;
+        width: 940px;
+        box-shadow: 0 0 4px 1px $gray;
+        overflow-x: hidden;
+        padding-bottom: 41px;
+        @media screen and (max-width: $middle-size) {
+            width: 320px;
+        }
+    }
+}

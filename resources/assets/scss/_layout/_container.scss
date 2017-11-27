@@ -1,0 +1,13 @@
+
+// import de arquivos padrão
+@import '../_base/_import';
+
+.dd-l-container {
+    max-width: pxToRem(760);
+    margin: 0 auto;
+    padding: 0 pxToRem(10);
+
+    @media(min-width: pxToRem(768)) {
+        padding: 0 pxToRem(20);
+    }
+}

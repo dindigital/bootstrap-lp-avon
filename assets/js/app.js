@@ -1,0 +1,1 @@
+!function(window,document,$,undefined){"use strict";var app=function(){var $public={};return $public}();window.app=app}(window,document,jQuery);

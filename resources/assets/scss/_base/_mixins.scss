@@ -1,0 +1,229 @@
+// Font Family
+@mixin fontFamily($font, $weight: 400, $style: normal) {
+	font-family: $font;
+	font-weight: $weight;
+	font-style: $style;
+	-webkit-font-smoothing: antialiased;
+}
+
+// Text Placeholder
+@mixin textPlaceholder($color: $colorBlack) {
+	&::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+	  	color: $color;
+	}
+	&::-moz-placeholder { /* Firefox 19+ */
+	  	color: $color;
+	}
+	&:-ms-input-placeholder { /* IE 10+ */
+	  	color: $color;
+	}
+	&:-moz-placeholder { /* Firefox 18- */
+	  	color: $color;
+	}
+}
+
+// Box Sizing
+@mixin boxSizing($box){
+	-moz-box-sizing: $box;
+	-webkit-box-sizing: $box;
+	box-sizing: $box;
+}
+
+// CSS transform
+@mixin transform($transformProperty...) {
+	-webkit-transform: $transformProperty;
+	-ms-transform: $transformProperty;
+	transform: $transformProperty;
+}
+
+// mixin for CSS calc() function
+@mixin calc($properties, $expression, $import) {
+  // PS: in $expression is necessary put the maths functions with spaces between them and set them like string
+  #{$properties}: -webkit-calc(#{$expression})$import;
+  #{$properties}: -moz-calc(#{$expression})$import;
+  #{$properties}: -o-calc(#{$expression})$import;
+  #{$properties}: calc(#{$expression})$import;
+}
+
+// CSS flex-box
+//for container box
+@mixin flexboxContainer($display, $flexDirection, $flexWrap, $justifyContent, $alignItems, $alignContent) {
+	@if $display == flex {
+		display: -webkit-box; // Chrome 20-, iOS 6-, Safari 3.1  -6
+		display: -webkit-flex; // Chrome 21 +
+		display: -moz-box; // FF 19-
+		display: -moz-flex;
+		display: -ms-flexbox; // IE 10
+		display: flex; // FF 20+, Chrome 29+, Opera 12.1, 17+
+	}
+	@elseif $display == inline-flex {
+		display: -webkit-inline-box; // Chrome 20-, iOS 6-, Safari 3.1  -6
+		display: -webkit-inline-flex; // Chrome 21 +
+		display: -moz-inline-box; // FF 19-
+		display: -moz-inline-flex;
+		display: -ms-inline-flexbox; // IE 10
+		display: inline-flex; // FF 20+, Chrome 29+, Opera 12.1, 17+
+	}
+	//flex-direction to old and new flex-box
+	@if $flexDirection == row {
+		-webkit-box-direction: normal;
+		-moz-box-direction: normal;
+		-webkit-box-orient: horizontal;
+		-moz-box-orient: horizontal;
+	}
+	@elseif $flexDirection == row-reverse {
+		-webkit-box-direction: reverse;
+		-moz-box-direction: reverse;
+		-webkit-box-orient: horizontal;
+		-moz-box-orient: horizontal;
+	}
+	@elseif $flexDirection == column {
+		-webkit-box-direction: normal;
+		-moz-box-direction: normal;
+		-webkit-box-orient: vertical;
+		-moz-box-orient: vertical;
+	}
+	@elseif $flexDirection == column-reverse {
+		-webkit-box-direction: reverse;
+		-moz-box-direction: reverse;
+		-webkit-box-orient: vertical;
+		-moz-box-orient: vertical;
+	}
+
+	-webkit-flex-direction: $flexDirection;
+	-ms-flex-direction: $flexDirection;
+	flex-direction: $flexDirection;
+	// IE 10
+	@if $flexWrap == nowrap {
+		-ms-flex-wrap: none;
+	}
+	@else {
+		-ms-flex-wrap: $flexWrap;
+	}
+
+	-webkit-flex-wrap: $flexWrap; // Chrome 20-, iOS 6-, Safari 3.1 - 6
+	flex-wrap: $flexWrap; // FF 28+, Chrome 21+, Opera 12.1, 17+, IE 11
+	//$justifyContent to old and new flex-box
+	@if $justifyContent == flex-start {
+		-webkit-box-pack: start;
+		-moz-box-pack: start;
+		-ms-flex-pack: start;
+	}
+	@elseif $justifyContent == flex-end {
+		-webkit-box-pack: end;
+		-moz-box-pack: end;
+		-ms-flex-pack: end;
+	}
+	@elseif $justifyContent == space-between {
+		-webkit-box-pack: justify;
+		-moz-box-pack: justify;
+		-ms-flex-pack: justify;
+	}
+	@elseif $justifyContent == space-around {
+		-webkit-box-pack: justify;
+		-moz-box-pack: justify;
+		-ms-flex-pack: distribute;
+	}
+	@else {
+		-webkit-box-pack: $justifyContent;
+		-moz-box-pack: $justifyContent;
+		-ms-flex-pack: $justifyContent;
+	}
+
+	-webkit-justify-content: $justifyContent;
+	justify-content: $justifyContent;
+	//align-items to old and new flex-box
+	@if $alignItems == flex-end {
+		-ms-flex-align: end;
+		-webkit-box-align: end;
+		-moz-box-align: end;
+	}
+	@elseif $alignItems == flex-start {
+		-ms-flex-align: start;
+		-webkit-box-align: start;
+		-moz-box-align: start;
+	}
+	@else {
+		-webkit-box-align: $alignItems;
+		-moz-box-align: $alignItems;
+		-webkit-align-items: $alignItems;
+	}
+
+	-ms-flex-align: $alignItems;
+	align-items: $alignItems;
+	//align-content for multiples browsers
+	@if $alignContent == flex-start {
+		-ms-flex-line-pack: start;
+	}
+	@elseif $alignContent == flex-end {
+		-ms-flex-line-pack: end;
+	}
+	@elseif $alignContent == space-between {
+		-ms-flex-line-pack: justify;
+	}
+	@elseif $alignContent == space-around {
+		-ms-flex-line-pack: distribute;
+	}
+	@else {
+		-ms-flex-line-pack: distribute;
+	}
+
+	-webkit-align-content: $alignContent;
+	align-content: $alignContent;
+}
+
+//for childrens of the box
+@mixin flexboxItens($flexOrder, $alignSelf, $flex) {
+	-webkit-box-ordinal-group: $flexOrder + 1; // Chrome 20-, iOS 6-, Safari 3.1 - 6
+	-moz-box-ordinal-group: $flexOrder + 1; // FF 19-
+	-ms-flex-order: $flexOrder; // IE 10
+	-webkit-order: $flexOrder; // Chrome 21 - 28
+	order: $flexOrder; // FF 20+, Chrome 29+, Opera 12.1, 17+
+	-webkit-box-flex: $flex; // Chrome 20-, iOS 6-, Safari 3.1 - 6
+	-moz-box-flex: $flex; // FF 19-
+	-webkit-flex: $flex; // Chrome 21 - 28
+	-ms-flex: $flex; // IE 10
+	flex: $flex; // FF 20+, Chrome 29+, Opera 12.1, 17+
+	@if $alignSelf == flex-start {
+		-ms-flex-item-align: start;
+	}
+	@elseif $alignSelf == flex-end {
+		-ms-flex-item-align: end;
+	}
+	@else {
+		-ms-flex-item-align: $alignSelf;
+	}
+
+	-webkit-align-self: $alignSelf;
+	align-self: $alignSelf;
+	//A propriedade FLEX é uma atalho para a mesma coisa escrita abaixo
+	//-webkit-flex-grow: 1;
+	//-webkit-flex-shrink: 1;
+	//-webkit-flex-basis: auto;
+}
+
+@mixin keyframes($animation-name) {
+  @-webkit-keyframes #{$animation-name} {
+    @content;
+  }
+  @-moz-keyframes #{$animation-name} {
+    @content;
+  }
+  @-ms-keyframes #{$animation-name} {
+    @content;
+  }
+  @-o-keyframes #{$animation-name} {
+    @content;
+  }
+  @keyframes #{$animation-name} {
+    @content;
+  }
+}
+
+@mixin animation($str) {
+  -webkit-animation: #{$str};
+  -moz-animation: #{$str};
+  -ms-animation: #{$str};
+  -o-animation: #{$str};
+  animation: #{$str};
+}
