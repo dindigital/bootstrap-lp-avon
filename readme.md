@@ -1,2 +1,1 @@
-# AVON
-## LP - ColorTrend
+# Bootstrap LP Avon
